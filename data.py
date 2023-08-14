@@ -1,0 +1,4 @@
+
+gradebook = []
+
+RegisteredUser = None
