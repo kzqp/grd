@@ -5,6 +5,7 @@ import add
 import data
 import grd_io
 import grade
+import show
 
 def show_unknown(arg, command=None):
   if command == None:
@@ -24,6 +25,8 @@ def main():
   if len(sys.argv) == 2:
     if sys.argv[1] == 'init':
       init.init()
+    elif sys.argv[1] == 'show':
+      show.show(data.RegisteredUser.current_grade_book)
     else:
       show_unknown(sys.argv[1])
       show_usage()      

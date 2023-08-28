@@ -38,7 +38,7 @@ def readFile(path):
         if ( '$' in p ):
           ex = p.split('$')
           s.addProblemSet(int(ex[0]))
-          ex.pop(1)
+          ex.pop(0)
           for e in ex:
             s.addExam(int(e))
         else:
