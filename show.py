@@ -73,13 +73,9 @@ def show(path):
           while i < 13:
             line += ' '
             i += 1
-        #if len(l[2]) < ps_length + 2: #use the count
-        #  i = len(l[2])
         
         line += str(l[3])
         print(line)
     else:
       print('No grades to show. Sorry.')
 
-
-        #str = input(f'({data.gradebook[i].id}) {data.gradebook[i].fn} {data.gradebook[i].ln}: ')
