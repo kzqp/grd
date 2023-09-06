@@ -2,6 +2,7 @@ import sys
 import os
 import init
 import add
+import bs
 import data
 import grd_io
 import grade
@@ -27,6 +28,8 @@ def main():
       init.init()
     elif sys.argv[1] == 'show':
       show.show(data.RegisteredUser.current_grade_book)
+    elif sys.argv[1] == 'bs':
+      bs.BrightspaceOutput(data.RegisteredUser.current_grade_book)
     else:
       show_unknown(sys.argv[1])
       show_usage()      

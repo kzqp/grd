@@ -6,3 +6,4 @@ class user:
     self.fn = first_name
     self.ln = last_name
     self.email = email
+

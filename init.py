@@ -1,4 +1,5 @@
 from datetime import datetime
+import os
 import student
 import grd_io
 import data
@@ -28,7 +29,7 @@ def init():
   #now to write the file(s)
   print('Writing student data to disk...', end='')
   grd_io.writeFile(f'.grd-{year}')
-  data.RegisteredUser.current_grade_book = '.grd-' + str(year)
+  data.RegisteredUser.current_grade_book = os.getcwd() + '/.grd-' + str(year)
   grd_io.set_current_gradebook()
   print('done!')
   #and the history file, someday
