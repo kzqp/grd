@@ -32,7 +32,6 @@ def BrightspaceOutput(path):
         line += s.id
         line += ', '
         #line += s.fn + '.' + s.ln + ', '
-        #institution insists on a comma in the userid
         i = 0
         for ps in s.ps:
             line += str(ps)
@@ -44,4 +43,3 @@ def BrightspaceOutput(path):
             line += str(ex)
         line += ', #'
         print(line)
-  
