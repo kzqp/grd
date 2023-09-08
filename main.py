@@ -29,7 +29,7 @@ def main():
     elif sys.argv[1] == 'show':
       show.show(data.RegisteredUser.current_grade_book)
     elif sys.argv[1] == 'bs':
-      bs.BrightspaceOutput(data.RegisteredUser.current_grade_book)
+      bs.brightspace_output(data.RegisteredUser.current_grade_book)
     else:
       show_unknown(sys.argv[1])
       show_usage()      

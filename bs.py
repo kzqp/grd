@@ -1,7 +1,9 @@
+"""Brightspace cvs format writer"""
 import data
 import grd_io
 
-def BrightspaceOutput(path):
+def brightspace_output(path):
+    """Produces CSV output suitable for Brightspace input."""
     grd_io.readFile(path)
     psc = len(data.gradebook[0].ps)
     exc = len(data.gradebook[0].ex)
@@ -27,19 +29,19 @@ def BrightspaceOutput(path):
             headline += ', '
     headline += ', End-of-Line Indicator'
     print(headline)
-    for s in data.gradebook:
+    for student in data.gradebook:
         line = ''
-        line += s.id
+        line += student.id
         line += ', '
-        #line += s.fn + '.' + s.ln + ', '
+        #line += student.fn + '.' + student.ln + ', '
         i = 0
-        for ps in s.ps:
-            line += str(ps)
+        for problem_set in student.ps:
+            line += str(problem_set)
             i += 1
             if i < psc:
                 line += ', '
-        for ex in s.ex:
+        for exam in student.ex:
             line += ', '
-            line += str(ex)
+            line += str(exam)
         line += ', #'
         print(line)
