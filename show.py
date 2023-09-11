@@ -78,4 +78,3 @@ def show(path):
         print(line)
     else:
       print('No grades to show. Sorry.')
-
