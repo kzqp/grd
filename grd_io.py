@@ -45,6 +45,7 @@ def readFile(path):
           s.addProblemSet(int(p))
     data.gradebook.append(s)
   f.close()
+
 def writeFile(path):
   i = 1
   with open(path, mode='w', buffering=1, encoding='utf-8') as f:
@@ -53,6 +54,7 @@ def writeFile(path):
       if i < len(data.gradebook):
         f.write('\n')
       i += 1
+
 def parse_student(str):
   prts = str.split(':')
   s = student.student(prts[0], prts[2], prts[1])
