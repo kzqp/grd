@@ -5,8 +5,8 @@ import re
 import data
 import student
 
-'''Parse student data'''
 def parse_student_data(xmlfile):
+    '''Parse student data'''
     re_student_id = re.compile('[0-9]{6}')
     with open(xmlfile, 'r') as xml_file:
         while True:
