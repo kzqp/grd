@@ -46,5 +46,5 @@ def gather_user_info():
     first_name = input('First Name: ')
     last_name = input('Last Name: ')
     email = input('email : ')
-    data.RegisteredUser = user.user(first_name, last_name, email)
+    data.RegisteredUser = user.User(first_name, last_name, email)
     grd_io.write_config_file()
