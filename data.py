@@ -1,4 +1,5 @@
+"""application data structures"""
 
 gradebook = []
 
-RegisteredUser = None
+registered_user = None
