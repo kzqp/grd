@@ -34,8 +34,8 @@ def init():
     print(f'Added {len(data.gradebook)} students to the gradebook for {year}.')
     #now to write the file(s)
     print('Writing student data to disk...', end='')
-    grd_io.writeFile(f'.grd-{year}')
-    data.RegisteredUser.current_grade_book = os.getcwd() + '/.grd-' + str(year)
+    grd_io.write_file(f'.grd-{year}')
+    data.registered_user.current_grade_book = os.getcwd() + '/.grd-' + str(year)
     grd_io.set_current_gradebook()
     print('done!')
     #and the history file, someday
@@ -46,5 +46,5 @@ def gather_user_info():
     first_name = input('First Name: ')
     last_name = input('Last Name: ')
     email = input('email : ')
-    data.RegisteredUser = user.User(first_name, last_name, email)
+    data.registered_user = user.User(first_name, last_name, email)
     grd_io.write_config_file()

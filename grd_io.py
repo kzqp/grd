@@ -22,12 +22,12 @@ def write_student_line(current_student):
     line = line + '*'
     line = line + current_student.username
     line = line + '*'
-    for grade in current_student.ps:
+    for grade in current_student.problem_sets:
         line = line + str(grade)
         line = line + ':'
     line = line[:-1]
     line = line + '$'
-    for grade in current_student.ex:
+    for grade in current_student.exams:
         line = line + str(grade)
         line = line + '$'
     return line[:-1]
@@ -88,17 +88,21 @@ def read_config_file():
                     email = v[1]
                 if v[0] == 'current_grade_book':
                     current_grade_book = v[1]
-        data.RegisteredUser = user.User(first_name, last_name, email)
-        if data.RegisteredUser.current_grade_book is None and os.path.exists(current_grade_book):
-            data.RegisteredUser.current_grade_book = current_grade_book
+        data.registered_user = user.User(first_name, last_name, email)
+        if data.registered_user.current_grade_book is None and \
+           os.path.exists(current_grade_book):
+            data.registered_user.current_grade_book = current_grade_book
         else:
-            init.gather_user_info()
+            pass
+            #maybe do nothing?
+            #print('run grd init to start a gradebook')
+            #init.gather_user_info()
 
 def write_config_file():
     """write configuration file"""
     with open(config_path, mode='w', encoding='utf-8') as f:
-        f.write(f'firstname={data.registered_user.fn}\n')
-        f.write(f'lastname={data.registered_user.ln}\n')
+        f.write(f'firstname={data.registered_user.first_name}\n')
+        f.write(f'lastname={data.registered_user.last_name}\n')
         f.write(f'email={data.registered_user.email}\n')
         if data.registered_user.current_grade_book is not None:
             f.write(

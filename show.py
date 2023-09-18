@@ -1,33 +1,37 @@
+"""write grades to terminal"""
+
 import data
 import grd_io
 
 def show(path):
-    grd_io.readFile(path)
+    """show grades on terminal, all pretty-like"""
+    grd_io.read_file(path)
     d = []
     i = 0
     while i < len(data.gradebook):
-        idn = data.gradebook[i].id
-        name = data.gradebook[i].fn + ' ' + data.gradebook[i].ln
+        idn = data.gradebook[i].student_ID
+        name = data.gradebook[i].first_name + ' ' \
+               + data.gradebook[i].last_name
         ps = ''
         j = 0
-        while j < len(data.gradebook[i].ps):
-          if len(str(data.gradebook[i].ps[j])) < 3:
-            z = len(str(data.gradebook[i].ps[j]))
+        while j < len(data.gradebook[i].problem_sets):
+          if len(str(data.gradebook[i].problem_sets[j])) < 3:
+            z = len(str(data.gradebook[i].problem_sets[j]))
             while z < 3:
               ps += ' '
               z += 1
-          ps += str(data.gradebook[i].ps[j])
+          ps += str(data.gradebook[i].problem_sets[j])
           ps += ' '
           j += 1
         ex = ''
         k = 0
-        while k < len(data.gradebook[i].ex):
-          if len(str(data.gradebook[i].ex[k])) < 3:
-            z = len(str(data.gradebook[i].ex[k]))
+        while k < len(data.gradebook[i].exams):
+          if len(str(data.gradebook[i].exams[k])) < 3:
+            z = len(str(data.gradebook[i].exams[k]))
             while z < 3:
               ps += ' '
               z += 1
-          ex += str(data.gradebook[i].ex[k])
+          ex += str(data.gradebook[i].exams[k])
           ex += ' '
           k += 1
         d.append((idn, name, ps.rstrip(), ex.rstrip()))
@@ -78,3 +82,4 @@ def show(path):
         print(line)
     else:
       print('No grades to show. Sorry.')
+      
