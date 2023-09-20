@@ -4,8 +4,11 @@ import data
 import grd_io
 
 def show(path):
-    """show grades on terminal, all pretty-like"""
-    grd_io.read_file(path)
+    """show grades on terminal, all pretty-like.
+       Pass None to this function if the gradebook is already loaded
+       in memory"""
+    if path is not None:
+        grd_io.read_file(path)
     d = []
     i = 0
     while i < len(data.gradebook):

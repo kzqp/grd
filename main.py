@@ -16,15 +16,16 @@ def show_unknown(arg, command=None):
         print(f'The given option ({arg}) is an unknown option of {command}.')
 
 def show_usage():
-    print('grd             --- show this message or collect user data on first use')
-    print('grd init        --- start new gradebook')
-    print('grd show        --- show gradebook')
-    print('grd bs          --- Brightspace cvs output')
-    print('grd parse file  --- start new gradebook from student data file')
-    print('grd add ps      --- add a problem set score')
-    print('grd add ex      --- add an exam score')
-    print('grd grade mt    --- prepare midterm grade')
-    print('grd grade final --- prepare final grade')
+    print('')
+    print('  grd             --- show this message or collect user data on first use')
+    print('  grd init        --- start new gradebook')
+    print('  grd bs          --- Brightspace cvs output')
+    print('  grd show        --- show gradebook')
+    print('  grd add ps      --- add a problem set score')
+    print('  grd add ex      --- add an exam score')
+    print('  grd grade mt    --- prepare midterm grade')
+    print('  grd grade final --- prepare final grade')
+    print('  grd parse file  --- start new gradebook from student data file')
 
 def main():
     if os.path.exists(grd_io.config_path):
