@@ -3,38 +3,47 @@ import data
 import grd_io
 import show
 
-def midtermgrade(path):
-    """display midterm grade"""
-    #guard for no exam yet
-    grd_io.read_file(path)
-    if len(data.gradebook[0].exams) == 1:
-        d = []
-        i = 0
-        while i < len(data.gradebook):
-            j = 0
-            psmean = 0
-            while j < len(data.gradebook[i].problem_sets):
-                psmean += data.gradebook[i].problem_sets[j]
-                j += 1
-            mtg = psmean / j * 0.70 + data.gradebook[i].exams[0] * 0.30
-            d.append([data.gradebook[i].student_ID, \
-                      data.gradebook[i].first_name \
-                      + ' ' +  data.gradebook[i].last_name, round(mtg)])
-            i += 1
-
-        long_name = 0
-        for l in d:
-            x = len(l[1])
-            if x > long_name:
-                long_name = x
-        for l in d:
-            print('(' + str(l[0]) + ') ' + l[1].ljust(long_name) + ' ' \
-                  + str(l[2]))
-    elif len(data.gradebook[0].exams) == 0:
-        print('Hmm ... it doesn\'t look like you\'ve given an exam, '
-              'I can\'t assign a midterm grade without an exam.')
-    else:
-        print('Hmm ... I see more than two exams. I am confused.')
+numerical_to_letter = { 100: 'A+',
+                         99: 'A+',
+                         98: 'A',
+                         97: 'A',
+                         96: 'A',
+                         95: 'A',
+                         94: 'A',
+                         93: 'A',
+                         92: 'A',
+                         91: 'A-',
+                         90: 'A-',
+                         89: 'B+',
+                         88: 'B+',
+                         87: 'B+',
+                         86: 'B+',
+                         85: 'B',
+                         84: 'B',
+                         83: 'B',
+                         82: 'B',
+                         81: 'B-',
+                         80: 'B-',
+                         79: 'C+',
+                         78: 'C+',
+                         77: 'C+',
+                         76: 'C+',
+                         75: 'C',
+                         74: 'C',
+                         73: 'C',
+                         72: 'C',
+                         71: 'C-',
+                         70: 'C-',
+                         69: 'D+',
+                         68: 'D+',
+                         67: 'D+',
+                         66: 'D+',
+                         65: 'D',
+                         64: 'D',
+                         63: 'D',
+                         62: 'D',
+                         61: 'D-',
+                         60: 'D-' }
   
 # recreate mt? how many ps were in the mt, store that somewhere
 
@@ -90,4 +99,9 @@ def grade(path, period):
         if x > longest_name:
             longest_name = x
     for l in d:
-      print('(' + str(l[0]) + ') ' + l[1].ljust(longest_name) + ' ' + str(l[2])) 
+        try:
+            letter_grade = numerical_to_letter[l[2]]
+        except KeyError:
+            letter_grade = 'F'
+        print('(' + str(l[0]) + ') ' + l[1].ljust(longest_name) +
+              ' ' + str(l[2]) + ' ' + letter_grade)

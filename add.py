@@ -3,6 +3,16 @@ import init
 import data
 import grd_io
 
+#too low exception
+class GradeTooLow(Exception):
+    """Raise when entered grade < 0"""
+    pass
+
+#too high exception
+class GradeTooHigh(Exception):
+    """Raise when entered grade > 100"""
+    pass
+
 def add_problem_set(path):
     """add problem set"""
     grd_io.read_file(path)
@@ -14,11 +24,20 @@ def add_problem_set(path):
                     f'{data.gradebook[i].first_name} '
                     f'{data.gradebook[i].last_name}: ')
         try:
-          grade = int(str)
-          data.gradebook[i].problem_sets.append(grade)
-          i += 1
-        except:
-          print('I think you may have made a mistake....')
+            grade = int(str)
+            if grade < 0:
+                raise GradeTooLow
+            elif grade > 100:
+                raise GradeTooHigh
+            else:
+                data.gradebook[i].problem_sets.append(grade)
+                i += 1
+        except GradeTooLow:
+            print('Did they really do that poorly?')
+        except GradeTooHigh:
+            print('On fire, aren\'t they?')
+        except NameError:
+            print('I think you may have made a mistake....')
     print(f'Added {len(data.gradebook)} grades for problem set '
           f'{len(data.gradebook[1].problem_sets)}.')
     grd_io.write_file(path)
@@ -35,8 +54,17 @@ def add_exam(path):
                     f'{data.gradebook[i].last_name}: ')
         try:
             grade = int(str)
-            data.gradebook[i].exams.append(grade)
-            i += 1
+            if grade < 0:
+                raise GradeTooLow
+            elif grade > 100:
+                raise GradeTooHigh
+            else:
+                data.gradebook[i].problem_sets.append(grade)
+                i += 1
+        except GradeTooLow:
+            print('Did they really do that poorly?')
+        except GradeTooHigh:
+            print('On fire, aren\'t they?')
         except:
             print('I think you may have made a mistake....')
     print(f'Added {len(data.gradebook)} grades for exam '
