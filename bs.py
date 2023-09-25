@@ -11,7 +11,7 @@ def brightspace_output(path):
     if psc == 0 and exc == 0:
         return
 
-    headline = 'OrdDefinedId, Username, '
+    headline = 'OrgDefinedId, Username, '
     #headline = 'OrgDefinedId, '
     i = 0
     while i < psc:
