@@ -65,7 +65,8 @@ def main():
                  show_usage()
         elif sys.argv[1] == 'grade':
             if sys.argv[2] == 'mt':
-                grade.grade(data.registered_user.current_grade_book, period='mt')
+                grade.grade(data.registered_user.current_grade_book,
+                            period='mt')
             elif sys.argv[2] == 'final':
                 grade.grade(data.registered_user.current_grade_book,
                             period='final')
