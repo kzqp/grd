@@ -39,7 +39,7 @@ def add_problem_set(path):
         except NameError:
             print('I think you may have made a mistake....')
     print(f'Added {len(data.gradebook)} grades for problem set '
-          f'{len(data.gradebook[1].problem_sets) + 1}.')
+          f'{len(data.gradebook[1].problem_sets)}.')
     grd_io.write_file(path)
     # and backup someday
     
@@ -59,7 +59,7 @@ def add_exam(path):
             elif grade > 100:
                 raise GradeTooHigh
             else:
-                data.gradebook[i].problem_sets.append(grade)
+                data.gradebook[i].exams.append(grade)
                 i += 1
         except GradeTooLow:
             print('Did they really do that poorly?')
@@ -68,6 +68,6 @@ def add_exam(path):
         except:
             print('I think you may have made a mistake....')
     print(f'Added {len(data.gradebook)} grades for exam '
-          f'{len(data.gradebook[1].exams) + 1}.')
+          f'{len(data.gradebook[1].exams)}.')
     grd_io.write_file(path)
     # and backup someday
