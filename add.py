@@ -39,7 +39,7 @@ def add_problem_set(path):
         except NameError:
             print('I think you may have made a mistake....')
     print(f'Added {len(data.gradebook)} grades for problem set '
-          f'{len(data.gradebook[1].problem_sets)}.')
+          f'{len(data.gradebook[1].problem_sets) + 1}.')
     grd_io.write_file(path)
     # and backup someday
     
@@ -68,6 +68,6 @@ def add_exam(path):
         except:
             print('I think you may have made a mistake....')
     print(f'Added {len(data.gradebook)} grades for exam '
-          f'{len(data.gradebook[1].exams)}.')
+          f'{len(data.gradebook[1].exams) + 1}.')
     grd_io.write_file(path)
     # and backup someday

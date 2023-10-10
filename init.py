@@ -12,6 +12,7 @@ def read_settings():
 
 def init():
     """initialize gradebook"""
+    #check current gradebook, skip if there for this year
     year = datetime.now().year
     print(f'Let\'s get started for {year}.')
     print('Enter your student list in the form StudentID:Username:'
