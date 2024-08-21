@@ -30,10 +30,17 @@ def write_student_line(current_student):
     for grade in current_student.exams:
         line = line + str(grade)
         line = line + '$'
-    return line[:-1]
+    line = line[:-1]
+    if data.registered_user.seminars:
+        line = line + '%'
+        for attendance in current_student.seminars:
+            line = line + str(attendance)
+            line = line + '%'
+    return line[:-1]        
 
 def read_file(path):
     """read student line from gradebook"""
+    print(path)
     with open(path, mode='r', buffering=1, encoding='utf-8') as f:
         for line in f:
             id_line = line.split(sep='*')
@@ -43,7 +50,7 @@ def read_file(path):
                 ps = id_line[4].split(':')
                 for p in ps:
                     if '$' in p:
-                        ex = p.split('$')
+                        ex = p.split('$') 'here, split on the %
                         s.add_problem_set(int(ex[0]))
                         ex.pop(0)
                         for e in ex:
@@ -57,6 +64,7 @@ def write_file(path):
     """write gradebook to disk"""
     i = 1
     with open(path, mode='w', buffering=1, encoding='utf-8') as f:
+        
         for current_student in data.gradebook:
             f.write(write_student_line(current_student))
             if i < len(data.gradebook):
@@ -78,16 +86,20 @@ def read_config_file():
             last_name = ''
             email = ''
             current_grade_book = ''
+            seminar = False
             for line in f:
                 v = line.split(sep='=')
                 if v[0] == 'firstname':
-                    first_name = v[1]
+                    first_name = v[1].rstrip()
                 if v[0] == 'lastname':
-                    last_name = v[1]
+                    last_name = v[1].rstrip()
                 if v[0] == 'email':
-                    email = v[1]
+                    email = v[1].rstrip()
                 if v[0] == 'current_grade_book':
-                    current_grade_book = v[1]
+                    current_grade_book = v[1].rstrip()
+                if v[0] == 'seminar':
+                    if v[1].rstrip() == 1:
+                        seminar = True
         data.registered_user = user.User(first_name, last_name, email)
         if data.registered_user.current_grade_book is None and \
            os.path.exists(current_grade_book):
@@ -97,6 +109,7 @@ def read_config_file():
             #maybe do nothing?
             #print('run grd init to start a gradebook')
             #init.gather_user_info()
+        data.registered_user.seminars = seminar
 
 def write_config_file():
     """write configuration file"""
@@ -107,9 +120,19 @@ def write_config_file():
         if data.registered_user.current_grade_book is not None:
             f.write(
             f'current_grade_book={data.registered_user.current_grade_book}\n')
+        if data.registered_user.seminars is not None:
+            if data.registered_user.seminars is True:
+                f.write('seminar=1')
+            else:
+                f.write('seminar=0')
 
 def set_current_gradebook():
     """open current gradebook"""
     with open(config_path, mode='a', encoding='utf-8') as f:
         f.write(
-          f'current_grade_book={data.registered_user.current_grade_book}')
+          f'current_grade_book={data.registered_user.current_grade_book}\n')
+        if data.registered_user.seminars is True:
+            f.write('seminar=1')
+        else:
+            f.write('seminar=0')
+            

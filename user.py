@@ -2,6 +2,7 @@
 class User:
     """user class"""
     current_grade_book = None
+    seminars = None
 
     def __init__(self, first_name, last_name, email):
         """user initialization""" 

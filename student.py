@@ -11,11 +11,16 @@ class Student:
         """add exam score"""
         self.exams.append(score)
 
+    def add_seminar(self, attendance):
+        """add seminar attendance"""
+        self.seminars.append(attendance)
+
     def __init__(self, student_ID, first_name, last_name, username):
         """create a student"""
         self.student_ID = student_ID
         self.first_name = first_name
         self.last_name = last_name
         self.username = username
+        self.seminars = []
         self.problem_sets = []
         self.exams = []

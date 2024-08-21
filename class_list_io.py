@@ -11,6 +11,12 @@ import student
 def parse_student_data(xmlfile):
     '''Parse student data'''
     year = datetime.now().year
+    print(f'Let\'s get started for {year}.')
+    string = input('Will there be a seminar series? [Y|n]: ')
+    if string.lower() == 'y' or string.lower() == '':
+        user.seminars = True
+    else:
+        user.seminars = False
     re_student_id = re.compile('[0-9]{6}')
     with open(xmlfile, 'r') as xml_file:
         while True:

@@ -25,6 +25,7 @@ def show_usage():
     print('  grd show        --- show gradebook')
     print('  grd add ps      --- add a problem set score')
     print('  grd add ex      --- add an exam score')
+    print('  grd add se      --- add seminar attendance')
     print('  grd grade mt    --- prepare midterm grade')
     print('  grd grade final --- prepare final grade')
     print('  grd parse file  --- start new gradebook from student data file')
@@ -51,6 +52,8 @@ def main():
                 add.add_problem_set(data.registered_user.current_grade_book)
             elif sys.argv[2] == 'ex':
                 add.add_exam(data.registered_user.current_grade_book)
+            elif sys.argv[2] == 'se':
+                add.add_seminar(data.registered_user.current_grade_book)
             else:
                 show_unknown(sys.argv[2], command='add')
                 show_usage()

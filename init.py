@@ -15,6 +15,11 @@ def init():
     #check current gradebook, skip if there for this year
     year = datetime.now().year
     print(f'Let\'s get started for {year}.')
+    string = input('Will there be a seminar series? [Y|n]: ')
+    if string.lower() == 'y' or string.lower() == '':
+        data.registered_user.seminars = True
+    else:
+        data.registered_user.seminars = False
     print('Enter your student list in the form StudentID:Username:'
           'Last Name:First Name.\n'
           'Enter a blank line when finished.')
