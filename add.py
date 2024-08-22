@@ -68,14 +68,14 @@ def add_exam(path):
         except:
             print('I think you may have made a mistake....')
     print(f'Added {len(data.gradebook)} grades for exam '
-          f'{len(data.gradebook[1].exams)}.')
+          f'{len(data.gradebook[0].exams)}.')
     grd_io.write_file(path)
     # and backup someday
 
 def add_seminar(path):
     """add seminar"""
     grd_io.read_file(path)
-    print(f'Let\'s add seminar attendance {len(data.gradebook[1].seminars) + 1}.')
+    print(f'Let\'s add seminar attendance {len(data.gradebook[0].seminars) + 1}.')
     i = 0
     while i < len(data.gradebook):
         str = input(f'({data.gradebook[i].student_ID}) '
@@ -97,6 +97,6 @@ def add_seminar(path):
         except:
             print('Seminar attendance is binary, 1 or 0.')
     print(f'Added {len(data.gradebook)} attedances for seminar '
-          f'{len(data.gradebook[1].seminars)}.')
+          f'{len(data.gradebook[0].seminars)}.')
     grd_io.write_file(path)
     # and backup someday
