@@ -96,7 +96,7 @@ def add_seminar(path):
             print('Attend more than once? Time travel?')
         except:
             print('Seminar attendance is binary, 1 or 0.')
-    print(f'Added {len(data.gradebook)} attedance for seminar '
+    print(f'Added {len(data.gradebook)} attedances for seminar '
           f'{len(data.gradebook[1].seminars)}.')
     grd_io.write_file(path)
     # and backup someday

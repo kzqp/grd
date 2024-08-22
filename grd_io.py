@@ -36,7 +36,8 @@ def write_student_line(current_student):
         for attendance in current_student.seminars:
             line = line + str(attendance)
             line = line + '%'
-    return line[:-1]        
+        line = line[:-1]
+    return line    
 
 def read_file(path):
     """read student line from gradebook"""
