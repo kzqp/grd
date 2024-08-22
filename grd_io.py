@@ -50,7 +50,13 @@ def read_file(path):
                 ps = id_line[4].split(':')
                 for p in ps:
                     if '$' in p:
-                        ex = p.split('$') 'here, split on the %
+                        ex = p.split('$')
+                        #if '%' in p:
+                        #    se = p.split('%')
+                        #    s.add_seminar(int(se[0]))
+                        #    se.pop(0)
+                        #    for s in se:
+                        #        s.add_seminar(int(s))
                         s.add_problem_set(int(ex[0]))
                         ex.pop(0)
                         for e in ex:
@@ -74,7 +80,7 @@ def write_file(path):
 def parse_student(string):
     """generate student from string, add to gradebook"""
     prts = string.split(':')
-    s = student.Student(prts[0], prts[2], prts[1], prts[3])
+    s = student.Student(prts[0], prts[3], prts[2], prts[1])
     data.gradebook.append(s)
 
 
