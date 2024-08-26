@@ -31,6 +31,7 @@ def write_student_line(current_student):
         line = line + str(grade)
         line = line + '$'
     line = line[:-1]
+    print(data.registered_user.seminars)
     if data.registered_user.seminars:
         line = line + '%'
         for attendance in current_student.seminars:
@@ -41,29 +42,46 @@ def write_student_line(current_student):
 
 def read_file(path):
     """read student line from gradebook"""
-    print(path)
+
     with open(path, mode='r', buffering=1, encoding='utf-8') as f:
         for line in f:
             id_line = line.split(sep='*')
             s = student.Student(id_line[0], id_line[1], id_line[2],
                                 id_line[3].replace('\n',''))
             if len(id_line) > 4:
-                ps = id_line[4].split(':')
-                for p in ps:
-                    if '$' in p:
-                        ex = p.split('$')
-                        #if '%' in p:
-                        #    se = p.split('%')
-                        #    s.add_seminar(int(se[0]))
-                        #    se.pop(0)
-                        #    for s in se:
-                        #        s.add_seminar(int(s))
-                        s.add_problem_set(int(ex[0]))
-                        ex.pop(0)
-                        for e in ex:
-                            s.add_exam(int(e))
+                data_line = id_line[4].rstrip()
+                try:
+                    ps = data_line[0:data_line.index('$')]
+                except ValueError:
+                    try:
+                        ps = data_line[0:data_line.index('%')]
+                        if len(ps) == 0:
+                            ps = None
+                    except ValueError:
+                        ps = None
+                try:
+                    if '%' in data_line:
+                        ex = data_line[data_line.index('$') + 1:data_line.index('%')]
                     else:
-                        s.add_problem_set(int(p))
+                        ex = data_line[data_line.index('$') + 1:len(data_line)]
+                except ValueError:
+                    ex = None
+                try:
+                    se = data_line[data_line.index('%') + 1:len(data_line)]
+                except ValueError:
+                    se = None
+                if ps is not None:
+                    problemsets = ps.split(':')
+                    for p in problemsets:
+                        s.add_problem_set(int(p))                    
+                if ex is not None:
+                    exams = ex.split('$')
+                    for e in exams:
+                        s.add_exam(int(e))
+                if se is not None:
+                    seminars = se.split('%')
+                    for ss in seminars:
+                        s.add_seminar(int(ss))
             data.gradebook.append(s)
         f.close()
 
@@ -105,7 +123,7 @@ def read_config_file():
                 if v[0] == 'current_grade_book':
                     current_grade_book = v[1].rstrip()
                 if v[0] == 'seminar':
-                    if v[1].rstrip() == 1:
+                    if v[1].rstrip() == '1':
                         seminar = True
         data.registered_user = user.User(first_name, last_name, email)
         if data.registered_user.current_grade_book is None and \
