@@ -27,18 +27,33 @@ def show(path):
           ps += ' '
           j += 1
         ex = ''
-        k = 0
-        while k < len(data.gradebook[i].exams):
-          if len(str(data.gradebook[i].exams[k])) < 3:
-            z = len(str(data.gradebook[i].exams[k]))
+        j = 0
+        while j < len(data.gradebook[i].exams):
+          if len(str(data.gradebook[i].exams[j])) < 3:
+            z = len(str(data.gradebook[i].exams[j]))
             while z < 3:
               ps += ' '
               z += 1
-          ex += str(data.gradebook[i].exams[k])
+          ex += str(data.gradebook[i].exams[j])
           ex += ' '
-          k += 1
-        d.append((idn, name, ps.rstrip(), ex.rstrip()))
+          j += 1
+
+        #seminars
+        se = ''
+        j = 0
+        while j < len(data.gradebook[i].seminars):
+            if len(str(data.gradebook[i].seminars[j])) < 2:
+                z = len(str(data.gradebook[i].seminars[j]))
+                while z < 2:
+                    se += ' '
+                    z += 1
+            se += str(data.gradebook[i].seminars[j])
+            se += ' '
+            j += 1
+        d.append((idn, name, ps.rstrip(), ex.rstrip(), se.rstrip()))
+        print(d)
         i += 1
+        
     if (len(d) > 0):
       longest_name = 0
       ps_length = 0
@@ -63,6 +78,7 @@ def show(path):
           titleline += ' '
           i += 1
       titleline += ' Exams'
+      titleline += ' Seminar'
       print(titleline)
       for l in d:
         line = str(l[0]) + ' ' + str(l[1])
@@ -82,6 +98,11 @@ def show(path):
             i += 1
         
         line += str(l[3])
+        i = len(l[3])
+        while i < 5:
+            line += ' '
+            i += 1
+        line += str(l[4])
         print(line)
     else:
       print('No grades to show. Sorry.')
