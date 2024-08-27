@@ -48,7 +48,7 @@ def show(path):
                     se += ' '
                     z += 1
             se += str(data.gradebook[i].seminars[j])
-            se += ' '
+            #se += ' '
             j += 1
         d.append((idn, name, ps.rstrip(), ex.rstrip(), se.rstrip()))
         print(d)
@@ -78,7 +78,7 @@ def show(path):
           titleline += ' '
           i += 1
       titleline += ' Exams'
-      titleline += ' Seminar'
+      titleline += ' Seminars'
       print(titleline)
       for l in d:
         line = str(l[0]) + ' ' + str(l[1])
