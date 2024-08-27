@@ -58,12 +58,15 @@ def grade(path, period):
         psmean = 0
         extotal = 0
         exmean = 0
+        sematt = 0
+        
         while j < len(data.gradebook[i].problem_sets):
             pstotal += data.gradebook[i].problem_sets[j]
             j += 1
         if j < 1:
             print('Hmm ... it doesn\'t look like you\'ve scored '
-                  'any problem sets, I can\'t assign a\ngrade '                                 'without a couple problem sets.\n')
+                  'any problem sets, I can\'t assign a\ngrade '
+                  'without a couple problem sets.\n')
             show.show(None)
             exit(0)
         else:
@@ -88,7 +91,19 @@ def grade(path, period):
                 exit(0) 
             else:
                 exmean = extotal / j
-        g = psmean * 0.70 + exmean * 0.30
+        j = 0
+        while j < len(data.gradebook[i].seminars):
+            sematt += data.gradebook[i].seminars[j]
+            j += 1
+            
+        if data.registered_user.seminars:
+            if sematt >= 2:
+                g = psmean * 0.65 + exmean * 0.30 + 5
+            else:
+                g = psmean * 0.65 + exmean * 0.30 + sematt * 50 * 0.05
+        else:
+            g = psmean * 0.70 + exmean * 0.30
+            
         d.append([data.gradebook[i].student_ID, data.gradebook[i].first_name \
               + ' ' +  data.gradebook[i].last_name, round(g)])
         i += 1
