@@ -48,7 +48,6 @@ def show(path):
                     se += ' '
                     z += 1
             se += str(data.gradebook[i].seminars[j])
-            #se += ' '
             j += 1
         d.append((idn, name, ps.rstrip(), ex.rstrip(), se.rstrip()))
         print(d)
