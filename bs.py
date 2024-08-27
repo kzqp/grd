@@ -7,12 +7,14 @@ def brightspace_output(path):
     grd_io.read_file(path)
     psc = len(data.gradebook[0].problem_sets)
     exc = len(data.gradebook[0].exams)
+    sec = len(data.gradebook[0].seminars)
 
-    if psc == 0 and exc == 0:
+    if psc == 0 and exc == 0 and sec == 0:
         return
 
     headline = 'OrgDefinedId, Username, '
     #headline = 'OrgDefinedId, '
+    headline += 'Seminar Requirement, '
     i = 0
     while i < psc:
         headline += 'Problem Set ' + str(i + 1) + ' Text Grade'
@@ -35,6 +37,18 @@ def brightspace_output(path):
         line += ', '
         line += student.username + ', '
         #line += student.fn + '.' + student.ln + ', '
+        if sec == 0:
+            line += '(0/0), '
+        else:
+            sem = 0
+            total_sem = 0
+            for seminar in student.seminars:
+                sem += seminar
+                total_sem += 1
+            if sem >= 2:
+                line += f'Met ({sem}/{total_sem}), '
+            else:
+                line += f'Unmet ({sem}/{total_sem}), '
         i = 0
         for problem_set in student.problem_sets:
             line += str(problem_set)
