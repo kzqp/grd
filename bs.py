@@ -14,7 +14,7 @@ def brightspace_output(path):
 
     headline = 'OrgDefinedId, Username, '
     #headline = 'OrgDefinedId, '
-    headline += 'Seminar Requirement, '
+    headline += 'Seminar Requirement Text Grade, '
     i = 0
     while i < psc:
         headline += 'Problem Set ' + str(i + 1) + ' Text Grade'
