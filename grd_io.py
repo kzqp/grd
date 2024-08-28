@@ -25,12 +25,15 @@ def write_student_line(current_student):
     for grade in current_student.problem_sets:
         line = line + str(grade)
         line = line + ':'
-    line = line[:-1]
-    line = line + '$'
+    if len(current_student.problem_sets) > 0:
+        line = line[:-1]
+    if len(current_student.exams) > 0:
+         line = line + '$'
     for grade in current_student.exams:
         line = line + str(grade)
         line = line + '$'
-    line = line[:-1]
+    if len(current_student.exams) > 0:
+        line = line[:-1]
 
     if data.registered_user.seminars:
         line = line + '%'
@@ -65,6 +68,7 @@ def read_file(path):
                                  ps = data_line
                              else:
                                  se = data_line
+
                  try:
                      if '%' in data_line:
                          ex = data_line[data_line.index('$') + 1:data_line.index('%')]
@@ -72,6 +76,7 @@ def read_file(path):
                          ex = data_line[data_line.index('$') + 1:len(data_line)]
                  except ValueError:
                      ex = None
+
                  try:
                      se = data_line[data_line.index('%') + 1:len(data_line)]
                  except ValueError:
