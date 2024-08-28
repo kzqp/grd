@@ -31,7 +31,7 @@ def write_student_line(current_student):
         line = line + str(grade)
         line = line + '$'
     line = line[:-1]
-    print(data.registered_user.seminars)
+
     if data.registered_user.seminars:
         line = line + '%'
         for attendance in current_student.seminars:
@@ -41,49 +41,56 @@ def write_student_line(current_student):
     return line    
 
 def read_file(path):
-    """read student line from gradebook"""
+     """read student line from gradebook"""
 
-    with open(path, mode='r', buffering=1, encoding='utf-8') as f:
-        for line in f:
-            id_line = line.split(sep='*')
-            s = student.Student(id_line[0], id_line[1], id_line[2],
-                                id_line[3].replace('\n',''))
-            if len(id_line) > 4:
-                data_line = id_line[4].rstrip()
-                try:
-                    ps = data_line[0:data_line.index('$')]
-                except ValueError:
-                    try:
-                        ps = data_line[0:data_line.index('%')]
-                        if len(ps) == 0:
-                            ps = None
-                    except ValueError:
-                        ps = None
-                try:
-                    if '%' in data_line:
-                        ex = data_line[data_line.index('$') + 1:data_line.index('%')]
-                    else:
-                        ex = data_line[data_line.index('$') + 1:len(data_line)]
-                except ValueError:
-                    ex = None
-                try:
-                    se = data_line[data_line.index('%') + 1:len(data_line)]
-                except ValueError:
-                    se = None
-                if ps is not None:
-                    problemsets = ps.split(':')
-                    for p in problemsets:
-                        s.add_problem_set(int(p))                    
-                if ex is not None:
-                    exams = ex.split('$')
-                    for e in exams:
-                        s.add_exam(int(e))
-                if se is not None:
-                    seminars = se.split('%')
-                    for ss in seminars:
-                        s.add_seminar(int(ss))
-            data.gradebook.append(s)
-        f.close()
+     with open(path, mode='r', buffering=1, encoding='utf-8') as f:
+         for line in f:
+             id_line = line.split(sep='*')
+             s = student.Student(id_line[0], id_line[1], id_line[2],
+                                 id_line[3].replace('\n',''))
+             if len(id_line) > 4:
+                 data_line = id_line[4].rstrip()
+                 try:
+                     ps = data_line[0:data_line.index('$')]
+                 except ValueError:
+                     try:
+                         ps = data_line[0:data_line.index('%')]
+                         if len(ps) == 0:
+                             ps = None
+                     except ValueError:
+                         if len(data_line) == 0:
+                             ps = None
+                         else:
+                             if len(data_line) != 1:
+                                 ps = data_line
+                             else:
+                                 se = data_line
+                 try:
+                     if '%' in data_line:
+                         ex = data_line[data_line.index('$') + 1:data_line.index('%')]
+                     else:
+                         ex = data_line[data_line.index('$') + 1:len(data_line)]
+                 except ValueError:
+                     ex = None
+                 try:
+                     se = data_line[data_line.index('%') + 1:len(data_line)]
+                 except ValueError:
+                     se = None
+                 if ps is not None:
+                     problemsets = ps.split(':')
+                     for p in problemsets:
+                         s.add_problem_set(int(p))
+                 if ex is not None:
+                     exams = ex.split('$')
+                     for e in exams:
+                         s.add_exam(int(e))
+                 if se is not None:
+                     seminars = se.split('%')
+                     for ss in seminars:
+                         s.add_seminar(int(ss))
+             data.gradebook.append(s)
+         f.close()
+
 
 def write_file(path):
     """write gradebook to disk"""
@@ -151,6 +158,8 @@ def write_config_file():
             else:
                 f.write('seminar=0')
 
+# This one is going away due to the append issue, above function should
+# always be used.
 def set_current_gradebook():
     """open current gradebook"""
     with open(config_path, mode='a', encoding='utf-8') as f:

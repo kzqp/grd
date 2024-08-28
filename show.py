@@ -50,7 +50,6 @@ def show(path):
             se += str(data.gradebook[i].seminars[j])
             j += 1
         d.append((idn, name, ps.rstrip(), ex.rstrip(), se.rstrip()))
-        print(d)
         i += 1
         
     if (len(d) > 0):

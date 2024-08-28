@@ -42,7 +42,7 @@ def init():
     print('Writing student data to disk...', end='')
     grd_io.write_file(f'.grd-{year}')
     data.registered_user.current_grade_book = os.getcwd() + '/.grd-' + str(year)
-    grd_io.set_current_gradebook()
+    grd_io.write_config_file()
     print('done!')
     #and the history file, someday
 
