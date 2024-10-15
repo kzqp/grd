@@ -96,7 +96,7 @@ def grade(path, period):
             sematt += data.gradebook[i].seminars[j]
             j += 1
             
-        if data.registered_user.seminars:
+        if data.registered_user.seminars and not period == 'mt':
             if sematt >= 2:
                 g = psmean * 0.65 + exmean * 0.30 + 5
             else:
